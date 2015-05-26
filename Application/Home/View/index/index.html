@@ -11,7 +11,7 @@
 				<h2 class="title">最新发布</h2>
 				<volist name="posts" id="vo">
 					<article class="post-item">
-						<header>&hearts; <a href="post.php?id={$vo.id}">{$vo.post_title}</a></header>
+						<header>&hearts; <a href="{:U('Post/Index',array('id'=>$vo['id']))}" target='_blank'>{$vo.post_title}</a></header>
 					</article>
 				</volist>
 			</div>
