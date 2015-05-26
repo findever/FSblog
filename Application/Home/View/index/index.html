@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<include file="public/head" />
+	</head>
+	<body>
+		<include file="public/nav" />
+		<section class="container">
+			<div class="content">
+				<h2 class="title">最新发布</h2>
+				<volist name="posts" id="vo">
+					<article class="post-item">
+						<header>&hearts; <a href="post.php?id={$vo.id}">{$vo.post_title}</a></header>
+					</article>
+				</volist>
+			</div>
+			<aside class="sidebar">
+				
+			</aside>
+		</section>
+		<include file="public/foot" />
+	</body>
+</html>

@@ -1,0 +1,175 @@
+/* 
+    Created on : 2015-5-26, 14:57:59
+    Author     : Findever <ifindever.com>
+*/
+
+/***********  reset *****************/
+html {
+	font-size: 10px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+	font-size: 1.4rem;
+	background: #fff;
+	color: #000;
+}
+*{
+	box-sizing: border-box;
+}
+ul,li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+input[type="text"],input[type="password"]{
+	padding: 5px 8px;
+	border: 1px #ccc solid;
+	background: #fff;
+	line-height: 21px;
+	height: 31px;
+}
+input[type="text"]:focus,input[type="password"]:focus{
+	outline: none;
+	border-color: #41C073;
+}
+button{
+	margin: 0;
+}
+button,
+input:not([type="radio"]):not([type="checkbox"]),
+select {
+  vertical-align: middle;
+}
+::-moz-placeholder{color:#999;} 
+::-webkit-input-placeholder{color:#999;}
+:-ms-input-placeholder{color:#999;}
+
+/***********  公用 *****************/
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clear{
+	clear: both;
+}
+
+/***********  导航 *****************/
+.top-nav{
+	width: 100%;
+	border-bottom: 1px #ccc solid;
+	box-shadow: 0 0 8px #333;
+	background-color: #f7f7f7;
+}
+.top-nav ul{
+	width: 1000px;
+	margin: 0 auto;
+	height: 60px;
+}
+.top-nav ul:after{
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.top-nav li{
+	height: 40px;
+	overflow: hidden;
+	margin-top: 12px;
+	margin-right: 20px;
+	display: inline-block;
+	float: left;
+}
+.top-nav li a{
+	display: block;
+	min-width: 80px;
+	padding: 0px 20px;
+	line-height: 36px;
+	background-color: #41C073;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+}
+.top-nav li a:hover{
+	color: #FCFCFC;
+	background-color: #38B017;
+}
+.top-nav li.search-form{
+	float: right;
+	padding-top: 1px;
+	margin-right: 0;
+}
+.top-nav li.search-form input{
+	border: 1px #41C073 solid;
+	font-size: 1.2rem;
+	width: 150px;
+	transition: width .3s;
+}
+.top-nav li.search-form input:focus{
+	width: 250px;
+}
+.search-form .search-btn{
+	height: 31px;
+	border: 1px #41C073 solid;
+	border-left: none;
+	background: #41C073;
+	padding: 0px 10px;
+	color: #fff;
+	font-size: 1.2rem;
+}
+/***********  内容区域 *****************/
+.container{
+	width: 1000px;
+	margin: 30px auto;
+}
+.container:after{
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.title{
+	margin: 0;
+	font-size: 1.6rem;
+	background-color: #F7F7F7;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 10px;
+	border-bottom: 1px solid #eaeaea;
+	font-weight: normal;
+}
+.content,.sidebar{
+	width: 70%;
+	display: inline-block;
+	background-color: #f7f7f7;
+	box-shadow: 0 0 8px #BBB;
+	padding: 10px 0px;
+	vertical-align: top;
+	min-height: 300px;
+	float: left;
+}
+.post-item{
+	padding: 10px 10px;
+	background: #fff;
+	border-bottom: 1px #f7f7f7 solid;
+}
+/***********  侧边栏 *****************/
+.sidebar{
+	width: 28%;
+	float: right;
+}
+/***********  底部 *****************/
+.footer{
+	width: 100%;
+	background: #F7F7F7;
+}
+.footer p{
+	width: 1000px;
+	margin: 0 auto;
+	padding: 20px 0;
+}

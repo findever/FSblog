@@ -1,0 +1,12 @@
+<nav class="top-nav">
+			<ul>
+				<foreach name="topNav" item="vo">
+					<li><a href="{$vo}" title="{$key}" target="_self">{$key}</a></li>
+				</foreach>
+				<li class="search-form">
+					<form action="search.php" method="get">
+						<input type="text" placeholder="输入关键字搜索" name="s" /><button class="search-btn">搜索</button>
+					</form>
+				</li>
+			</ul>
+		</nav>
