@@ -8,16 +8,34 @@
 		<include file="public/nav" />
 		<section class="container">
 			<div class="content">
-				<h2 class="title">最新发布</h2>
+				<h2 class="title">最新文章</h2>
 				<volist name="posts" id="vo">
 					<article class="post-item">
-						<header>&hearts; <a href="{:U('Post/Index',array('id'=>$vo['id']))}" target='_blank'>{$vo.post_title}</a></header>
+						<header class="post-item-title">
+							<a href="{:U('Post/index',array('id'=>$vo['id']))}" target='_blank'>{$vo.post_title}</a>
+						</header>
+						<p>
+							<span class="muted">
+								<a href="" target="_blank"><i class="icon-user icon12"></i> {$vo.post_author}</a>
+							</span>
+							<span class="muted">
+								<i class="icon-time icon12"></i> {$vo.post_date|dateToFriendlyWords}
+							</span>
+							<span class="muted">
+								<i class="icon-eye-open icon12"></i> {$vo.post_view_count}浏览
+							</span>
+							<span class="muted">
+								<a href="" target="_blank"><i class="icon-comment icon12"></i> {$vo.post_comment_count}评论</a>
+							</span>
+						</p>
+						<p class="post-item-remark">
+							<img class="post-item-thumbnail" src="{$vo.post_thumbnail}" alt="{$vo.post_title}" />
+							{$vo.post_remark}
+						</p>
 					</article>
 				</volist>
 			</div>
-			<aside class="sidebar">
-				
-			</aside>
+			<include file="public/side" />
 		</section>
 		<include file="public/foot" />
 	</body>

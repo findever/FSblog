@@ -24,6 +24,30 @@ class PostController extends BaseController {
 		$this->assign("topNav", $this->_getTopNav());
 		$this->display();
 	}
+	
+	/**
+	 * 刷新文章的缩略图和摘要，辅助更新数据用
+	 * @access public
+	 */
+	public function flush(){
+		$postModel = M('post');
+		$data = $postModel->select();
+		$total = count($data);
+		$successCount = 0;
+		$errorCount = 0;
+		foreach($data as &$v){
+			$v['post_thumbnail'] = '/Public/img/default_post_thumbnail.png';
+			$v['post_remark'] = mb_substr(trim(strip_tags($v['post_content'])), 0, 300,'utf-8');
+			unset($v['post_content']);
+			if($postModel->save($v) !== false){
+				$successCount ++;
+			}else{
+				$errorCount ++;
+			}
+		}
+		echo "总数：",$total," ，成功数：",$successCount," ，失败数：",$errorCount;
+		exit();
+	}
 
 	/**
 	 * 获取指定id文章的信息
@@ -32,7 +56,7 @@ class PostController extends BaseController {
 	 * @return Array 文章信息数组
 	 */
 	private function _getPostById($id) {
-		return M('post')->where("id=" . $id)->find();
+		return D('post')->where("id=" . $id)->find();
 	}
 
 }

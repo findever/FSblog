@@ -7,5 +7,5 @@
  * @Description
  */
 return array(
-	
+	'URL_MODEL' => '2'
 );
