@@ -19,7 +19,9 @@ class IndexController extends BaseController {
 	 * @access public
 	 */
 	public function index() {
-		$this->assign("posts", $this->_getLastPosts());
+		list($posts,$show) = $this->_getLastPosts(I('get.p'));
+		$this->assign("posts", $posts);
+		$this->assign("pagination", $show);
 		$this->assign("topNav", $this->_getTopNav());
 		$this->display();
 	}
@@ -27,12 +29,20 @@ class IndexController extends BaseController {
 	/**
 	 * 获取文章列表
 	 * @access private
-	 * @return Array 文章列表
+	 * @param Int $p 页码
+	 * @param Int $size 分页大小，默认15
+	 * @return Array 文章列表数据及文章分页
 	 */
-	private function _getLastPosts() {
-		$postModel = D('post');
-		$posts = $postModel->where("post_status=0")->limit(10)->select();
-		return $posts;
+	private function _getLastPosts($p,$size=15) {
+		$postModel = M('post');
+		$condition = "post_status=0";
+		$count = $postModel->where($condition)->count();
+		$p = intval($p);
+		$p = min(max($p,1),ceil($count/$size));
+		$page = new \Think\Page($count,$size);
+		$show = $page->show();
+		$posts = $postModel->where($condition)->page($p)->limit($size)->order('id desc')->select();
+		return array($posts,$show);
 	}
 
 }

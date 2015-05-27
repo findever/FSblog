@@ -5,7 +5,8 @@
 
 /***********  reset *****************/
 html {
-	font-size: 10px;
+	-webkit-text-size-adjust: none;
+	font-size: 62.5%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
@@ -54,8 +55,8 @@ a:hover{
 	color: #F5008C;
 }
 p{
-	margin: 0;
-	padding: 10px 10px;
+	padding: 0;
+	margin: 10px 0px;
 }
 
 /***********  公用 *****************/
@@ -361,7 +362,8 @@ p{
 .post-item-remark{
 	height: 100px;
 	overflow: hidden;
-	line-height: 2.5rem;
+	line-height: 1.785;
+	text-overflow: ellipsis;
 }
 .post-item-remark:after{
 	content: "...";
