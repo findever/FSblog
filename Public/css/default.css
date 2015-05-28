@@ -370,6 +370,10 @@ code,pre{
 	transition: margin .3s ease-in-out;
 	vertical-align: middle;
 }
+.post-item-title span{
+	display: inline-block;
+	vertical-align: middle;
+}
 .post-item-title a:hover{
 	margin-left: 10px;
 }
@@ -436,6 +440,7 @@ code,pre{
 	background: #EFEFEF;
 	padding: 10px;
 	color: #666;
+	margin-top:15px;
 }
 .post-adjoin{
 	text-indent: 0;
@@ -451,6 +456,9 @@ code,pre{
 }
 .post-adjoin span{
 	display: inline-block;
+}
+.post-item-comments{
+	padding: 20px 10px;
 }
 /***********  侧边栏 *****************/
 .sidebar{

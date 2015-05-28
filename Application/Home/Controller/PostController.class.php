@@ -71,7 +71,7 @@ class PostController extends BaseController {
 	private function _getAdjoinPost($postId){
 		$postModel = M('post');
 		$prev = $postModel->where('post_status=0 and id>'.$postId)->field('id,post_title')->find();
-		$next = $postModel->where('post_status=0 and id<'.$postId)->field('id,post_title')->find();
+		$next = $postModel->where('post_status=0 and id<'.$postId)->field('id,post_title')->order('id desc')->find();
 		return array($prev,$next);
 	}
 
