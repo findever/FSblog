@@ -7,10 +7,49 @@
   <body>
       <include file="public/nav" />
 		<section class="container">
-			<div class="content">
+			<div class="content post-page">
 				<article class="post-item">
-					<header>{$post.post_title}</header>
+					<header class="post-item-title">
+						<if condition="$post['post_from']">
+							<i class='post-from-icon transport'>转</i>
+						<else />
+							<i class='post-from-icon'>原</i>
+						</if>
+						{$post.post_title}
+					</header>
+					<p>
+						<span class="muted">
+							<a href="" target="_blank"><i class="icon-user icon12"></i> {$post.post_author}</a>
+						</span>
+						<span class="muted">
+							<i class="icon-time icon12"></i> {$post.post_date}
+						</span>
+						<span class="muted">
+							<i class="icon-eye-open icon12"></i> {$post.post_view_count}浏览
+						</span>
+						<span class="muted">
+							<a href="#comments" target="_blank"><i class="icon-comment icon12"></i> {$post.post_comment_count}评论</a>
+						</span>
+					</p>
+					<div class="post-item-content">
+						{$post.post_content}
+						<div class='post-from-info'>
+							<if condition="$post['post_from']">
+								本文转自：<a href='{$post.post_from}' target='_blank'>{$post.post_from}</a>
+							<else />
+								转载请注明：<a href="{:U('Post/index',array('id'=>$post['id']))}" target='_blank'>{$post.post_title}</a>
+							</if>
+						</div>
+					</div>
 				</article>
+				<nav class="post-adjoin">
+					<notempty name="prevPost">
+						<span class="post-adjoin-prev fl"><a href="{:U('Post/index',array('id'=>$prevPost['id']))}">&lt;&lt; {$prevPost.post_title}</a></span>
+					</notempty>
+					<notempty name="nextPost">
+						<span class="post-adjoin-prev fr"><a href="{:U('Post/index',array('id'=>$nextPost['id']))}">{$nextPost.post_title} &gt;&gt;</a></span>
+					</notempty>
+				</nav>
 			</div>
 			<include file="public/side" />
 		</section>

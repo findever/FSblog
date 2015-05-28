@@ -20,6 +20,9 @@ class PostController extends BaseController {
 	 */
 	public function index() {
 		$postId = I('get.id', 0, 'intval');
+		list($prevPost,$nextPost) = $this->_getAdjoinPost($postId);
+		$this->assign('prevPost',$prevPost);
+		$this->assign('nextPost',$nextPost);
 		$this->assign('post', $this->_getPostById($postId));
 		$this->assign("topNav", $this->_getTopNav());
 		$this->display();
@@ -56,7 +59,20 @@ class PostController extends BaseController {
 	 * @return Array 文章信息数组
 	 */
 	private function _getPostById($id) {
-		return D('post')->where("id=" . $id)->find();
+		return M('post')->where("id=" . $id)->find();
+	}
+	
+	/**
+	 * 获取指定id文章的上下文章
+	 * @access private
+	 * @param Int $postId 文章id
+	 * @return Array 上下文章
+	 */
+	private function _getAdjoinPost($postId){
+		$postModel = M('post');
+		$prev = $postModel->where('post_status=0 and id>'.$postId)->field('id,post_title')->find();
+		$next = $postModel->where('post_status=0 and id<'.$postId)->field('id,post_title')->find();
+		return array($prev,$next);
 	}
 
 }

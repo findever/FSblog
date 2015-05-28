@@ -58,6 +58,10 @@ p{
 	padding: 0;
 	margin: 10px 0px;
 }
+code,pre{
+	word-break: break-all;
+	word-wrap: break-word;
+}
 
 /***********  公用 *****************/
 .fl{
@@ -333,7 +337,6 @@ p{
 	display: inline-block;
 	background-color: #f7f7f7;
 	box-shadow: 0 0 8px #BBB;
-	padding: 10px 0px;
 	vertical-align: top;
 	min-height: 300px;
 	float: left;
@@ -347,9 +350,25 @@ p{
 	background-color: #FAFAFA;
 	box-shadow: -2px 2px 5px #41C073;
 }
-.post-item-title a{
+.post-from-icon{
+	font-style: normal;
+	font-size: 1.4rem;
+	background-color: #159606;
+	margin-right: 5px;
+	padding: 3px 5px;
+	vertical-align: middle;
+	display: inline-block;
+	color: #fff;
+	border-radius: 15px;
+}
+.post-from-icon.transport{
+	background-color: #A6A6A6;
+}
+
+.post-item-title,.post-item-title a{
 	font-size: 2rem;
 	transition: margin .3s ease-in-out;
+	vertical-align: middle;
 }
 .post-item-title a:hover{
 	margin-left: 10px;
@@ -363,7 +382,7 @@ p{
 	height: 100px;
 	overflow: hidden;
 	line-height: 1.785;
-	text-overflow: ellipsis;
+	word-break: break-all;
 }
 .post-item-remark:after{
 	content: "...";
@@ -381,19 +400,57 @@ p{
 .pagination a,.pagination span{
 	margin-right: 3px;
 	background: #28C389;
-	padding: 0px 8px;
-	height: 25px;
-	line-height: 25px;
+	padding: 2px 8px;
+	height: 26px;
 	min-width: 30px;
 	display: inline-block;
 	color: #fff;
+	border: 1px #28C389 solid;
 }
 .pagination span.current{
 	background: #CBCBCB;
+	border-color: #CBCBCB;
 }
 .pagination a:hover{
-	background: #CBCBCB;
-	box-shadow: 0 0 5px #333;
+	background: #28C389;
+	box-shadow: 0 0 5px #027E03;
+	border-color: #44842A;
+}
+.post-item-content{
+	font-size: 1.4rem;
+	line-height: 2;
+	text-indent:2em;
+}
+.post-page .post-item{
+	background-color: #fff;
+	box-shadow: none;
+}
+.post-item-content{
+	background: #F9F9F9;
+	padding: 10px;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+.post-from-info{
+	text-indent: 0;
+	background: #EFEFEF;
+	padding: 10px;
+	color: #666;
+}
+.post-adjoin{
+	text-indent: 0;
+	padding: 10px 10px;
+	background-color: #fff;
+}
+.post-adjoin:after{
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.post-adjoin span{
+	display: inline-block;
 }
 /***********  侧边栏 *****************/
 .sidebar{

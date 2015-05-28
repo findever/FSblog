@@ -12,6 +12,11 @@
 				<volist name="posts" id="vo">
 					<article class="post-item">
 						<header class="post-item-title">
+							<if condition="$vo['post_from']">
+								<i class='post-from-icon transport'>转</i>
+							<else />
+								<i class='post-from-icon'>原</i>
+							</if>
 							<a href="{:U('Post/index',array('id'=>$vo['id']))}" target='_blank'>{$vo.post_title}</a>
 						</header>
 						<p>
@@ -25,7 +30,7 @@
 								<i class="icon-eye-open icon12"></i> {$vo.post_view_count}浏览
 							</span>
 							<span class="muted">
-								<a href="" target="_blank"><i class="icon-comment icon12"></i> {$vo.post_comment_count}评论</a>
+								<a href="{:U('Post/index',array('id'=>$vo['id']))}#comments" target="_blank"><i class="icon-comment icon12"></i> {$vo.post_comment_count}评论</a>
 							</span>
 						</p>
 						<p class="post-item-remark">
