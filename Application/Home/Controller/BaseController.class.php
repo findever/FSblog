@@ -4,7 +4,7 @@
  * @author Findever 
  * @link ifindever.com 
  * @datetime 2015-5-26 21:42:20
- * @Description
+ * @Description 控制器基类
  */
 
 namespace Home\Controller;
