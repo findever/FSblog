@@ -6,7 +6,7 @@
 /***********  reset *****************/
 html {
 	-webkit-text-size-adjust: none;
-	font-size: 62.5%;
+	font-size: 10px;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
@@ -373,6 +373,27 @@ p{
 	width: 100px;
 	vertical-align: middle;
 	margin-right: 10px;
+}
+.pagination{
+	text-align: center;
+	padding: 15px 0px;
+}
+.pagination a,.pagination span{
+	margin-right: 3px;
+	background: #28C389;
+	padding: 0px 8px;
+	height: 25px;
+	line-height: 25px;
+	min-width: 30px;
+	display: inline-block;
+	color: #fff;
+}
+.pagination span.current{
+	background: #CBCBCB;
+}
+.pagination a:hover{
+	background: #CBCBCB;
+	box-shadow: 0 0 5px #333;
 }
 /***********  侧边栏 *****************/
 .sidebar{

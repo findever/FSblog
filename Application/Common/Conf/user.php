@@ -7,5 +7,6 @@
  * @Description
  */
 return array(
-	'URL_MODEL' => '2'
+	'URL_MODEL' => '2',
+	'SHOW_PAGE_TRACE' =>true
 );
