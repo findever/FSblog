@@ -35,7 +35,7 @@ class IndexController extends BaseController {
 	 */
 	private function _getLastPosts($p, $size = 10) {
 		$postModel = M('post');
-		$condition = "post_status=0";
+		$condition = "post_status=1";
 		$count = $postModel->where($condition)->count();
 		$p = intval($p);
 		$p = min(max($p, 1), ceil($count / $size));

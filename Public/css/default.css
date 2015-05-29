@@ -12,7 +12,7 @@ html {
 body {
 	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
 	font-size: 1.4rem;
-	background: #fff;
+	background: #DBDBDB;
 	color: #000;
 }
 *{
@@ -464,6 +464,13 @@ code,pre{
 .sidebar{
 	width: 28%;
 	float: right;
+	padding: 10px;
+}
+.sidebar-item{
+	background-color: #fff;
+}
+.sidebar-item .title{
+	padding: 0;
 }
 /***********  底部 *****************/
 .footer{
@@ -474,4 +481,16 @@ code,pre{
 	width: 1000px;
 	margin: 0 auto;
 	padding: 20px 0;
+}
+#goTop{
+	display: none;
+	position: fixed;
+	bottom: 100px;
+	left: 50%;
+	margin-left: 520px;
+	width: 64px;
+	height: 64px;
+	line-height: 100;
+	overflow: hidden;
+	background: url(../img/ico/gTopa.png) no-repeat;
 }

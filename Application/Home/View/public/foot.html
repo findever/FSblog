@@ -7,7 +7,7 @@
 		</footer>
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
-		var duoshuoQuery = {short_name:"loacalhost"};
+			var duoshuoQuery = {short_name:"loacalhost"};
 			(function () {
 				var ds = document.createElement('script');
 				ds.type = 'text/javascript';
@@ -19,3 +19,19 @@
 			})();
 		</script>
 		<!-- 多说公共JS代码 end -->
+		<!-- 回到顶部代码 start -->
+		<script type="text/javascript">
+			$(function(){
+				$('<div id="goTop"></div>').appendTo('body').click(function(){
+					$('html,body').animate({'scrollTop':0},500);
+				});
+				$(window).scroll(function(){
+					if($(window).scrollTop() > 100){
+						$('#goTop').fadeIn();
+					}else{
+						$('#goTop').fadeOut();
+					}
+				})
+			});
+		</script>
+		<!-- 回到顶部代码 end -->
