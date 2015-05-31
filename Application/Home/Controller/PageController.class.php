@@ -15,11 +15,18 @@ use Home\Controller\BaseController;
  */
 class PageController extends BaseController{
 	
+	// 定义模块url
+	private $_modules = array('Admin','Home');
+
 	/**
 	 * 空方法，用于接收所有请求
 	 * @param String $name 页面标识
 	 */
 	public function _empty($name){
+		if($_SERVER['PATH_INFO'] === $name && in_array($name, $this->_modules)){
+			redirect(U($name.'/Index/index'));
+			return;
+		}
 		$this->go($name);
 	}
 	

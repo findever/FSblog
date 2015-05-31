@@ -9,6 +9,6 @@
 return array(
 	'URL_ROUTER_ON' => true,
 	'URL_ROUTE_RULES' => array(
-		'/^([^\/\.]+\/?)$/' => array('Page/:1')
-	),
+		'/^(\w+)$/' => array('Home/Page/:1'),
+	)
 );
