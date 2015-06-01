@@ -20,10 +20,14 @@ class PostController extends BaseController {
 	 */
 	public function index() {
 		$postId = I('get.id', 0, 'intval');
+		$post = $this->_getPostById($postId);
+		if(empty($post)){
+			$this->error("对不起，文章不存在或已删除！");
+		}
 		list($prevPost,$nextPost) = $this->_getAdjoinPost($postId);
 		$this->assign('prevPost',$prevPost);
 		$this->assign('nextPost',$nextPost);
-		$this->assign('post', $this->_getPostById($postId));
+		$this->assign('post', $post);
 		$this->assign("topNav", $this->_getTopNav());
 		$this->display();
 	}

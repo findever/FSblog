@@ -8,7 +8,7 @@
 		<section role="login" class="login-form">
 			<h2>后台管理登录</h2>
 			<span class="login-error-notice">{$defaultVals.notice}</span>
-			<form action="" method="post">
+			<form action="{:U('Index/login')}" method="post">
 				<label for="user">
 					帐号：<input type="text" id="user" name="user" value='{$defaultVals.user}' />
 				</label>

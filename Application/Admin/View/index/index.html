@@ -6,21 +6,26 @@
 	</head>
 	<body class="whole-screen">
 		<header class="header">
-			<h2>后台管理系统</h2>
+			<h2>— FSblog后台管理系统</h2>
 			<div class="user-info">
 				欢迎您，{:session('user')}， <a href="{:U('Index/logout')}" title='注销'>注销</a>
 			</div>
 		</header>
-		<div class="frame">
-			<iframe src="{:U('Index/main')}" ></iframe>
+		<div class="left-content">
+			<include file="public/nav" />
 		</div>
-		<!-- 高度满屏start -->
+		<div class="frame right-content">
+			<iframe id="main" name="main" src="{:U('Index/main')}" ></iframe>
+		</div>
+		<!-- 宽高修正start -->
 		<script type="text/javascript">
 			$(window).resize((function () {
-				$('.frame').height($(window).height() - $('.header').height());
+				$('.right-content').outerWidth($(window).width() - $('.left-content').outerWidth());
+				var contentH = $(window).height() - $('.header').outerHeight();
+				$('.right-content,.left-content').outerHeight(contentH);
 				return arguments.callee;
 			})());
 		</script>
-		<!-- 高度满屏end -->
+		<!-- 宽高修正end -->
 	</body>
 </html>

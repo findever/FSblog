@@ -12,7 +12,7 @@ html {
 body {
 	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
 	font-size: 1.4rem;
-	background: #DBDBDB;
+	background: #F2F2F2;
 	color: #000;
 }
 *{
@@ -248,13 +248,14 @@ code,pre{
 /***********  登录 *****************/
 .login-form{
 	display: block;
-	width: 600px;
+	width: 650px;
 	margin: 0 auto;
-	margin-top: 200px;
+	margin-top: 150px;
 	background: #fff;
-	padding: 40px 30px 50px 30px;
+	padding: 20px 30px 50px 30px;
 	border-radius: 100px;
 	box-shadow: 0 0 50px #000;
+	text-align: center;
 }
 .login-form h2{
 	display: inline-block;
@@ -273,16 +274,24 @@ code,pre{
 	color: #F5008C;
 	margin-left: 20px;
 }
-/***********  登录 *****************/
+/***********  首页框架 *****************/
 .whole-screen{
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 }
+.whole-screen:after{
+	content: "";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	clear: both;
+}
 .header{
 	background: #fff;
 	display: block;
 	position: relative;
+	box-shadow: 0 10px 10px #B8B8B8; 
 }
 .header h2{
 	display: inline-block;
@@ -302,4 +311,90 @@ iframe{
 	height: 100%;
 	overflow-x: hidden;
 	border: none;
+}
+.left-content{
+	width: 250px;
+	display: inline-block;
+	padding: 50px 10px;
+	float: left;
+}
+.right-content{
+	width: 70%;
+	display: inline-block;
+	float: left;
+	border-left: 1px #CBCBCB solid;
+	box-shadow: 0 0 10px #ccc;
+}
+/***********  侧边导航栏 *****************/
+.nav-sider{
+	
+}
+.nav-sider li{
+	
+}
+.nav-sider li a{
+	display: block;
+	padding: 15px 15px;
+	color: #6F6F6F;
+	border-bottom: 1px #E4E4E4 solid;
+	transition: padding .5s;
+}
+.nav-sider li a:hover{
+	background: #41C073;
+	padding-left: 25px;
+	color: #fff;
+}
+/***********  内容区域 *****************/
+.content-wrap{
+	padding: 20px 10px;
+}
+.option-area{
+	padding: 10px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px #ccc solid;
+}
+.content{
+	
+}
+.c-table{
+	width: 100%;
+	text-align: center;
+}
+.c-table th,.c-table td{
+	padding: 5px 10px;
+	border: 1px #DFDFDF solid;
+	background: #EAEAEA;
+}
+.c-table th{
+	background: #E2E2E2;
+	border-color: #CFCFCF;
+}
+.c-table tbody tr:hover td{
+	background: #F5F4F4;
+}
+.pagination{
+	text-align: right;
+	padding: 15px 0px;
+}
+.pagination a,.pagination span{
+	margin-right: 3px;
+	background: #28C389;
+	padding: 2px 8px;
+	height: 26px;
+	min-width: 30px;
+	display: inline-block;
+	color: #fff;
+	border: 1px #28C389 solid;
+}
+.pagination span.current{
+	background: #CBCBCB;
+	border-color: #CBCBCB;
+}
+.pagination a:hover{
+	background: #28C389;
+	box-shadow: 0 0 5px #027E03;
+	border-color: #44842A;
+}
+.pagination .muti-apply{
+	float: left;
 }

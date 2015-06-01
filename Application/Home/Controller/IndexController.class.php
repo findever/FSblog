@@ -27,7 +27,7 @@ class IndexController extends BaseController {
 	}
 
 	/**
-	 * 获取文章列表
+	 * 获取最新文章列表
 	 * @access private
 	 * @param Int $p 页码
 	 * @param Int $size 分页大小，默认15
