@@ -12,11 +12,18 @@ namespace Admin\Controller;
 use Admin\Controller\BaseController;
 
 class IndexController extends BaseController {
-
+	
+	/**
+	 * 后台首页
+	 */
 	public function index() {
-		$this->show('xxx');
+		$this->display();
 	}
-
+	
+	/**
+	 * 登录
+	 * @throws \Exception
+	 */
 	public function login() {
 		session('user','');
 		$defaultVals = array('user' => 'admin', 'pwd' => 'admin', 'notice' => '');
@@ -44,8 +51,11 @@ class IndexController extends BaseController {
 		$this->assign('defaultVals', $defaultVals);
 		$this->display('login');
 	}
-
-	public function unlogin() {
+	
+	/**
+	 * 注销
+	 */
+	public function logout() {
 		session('user',null);
 		$this->login();
 	}

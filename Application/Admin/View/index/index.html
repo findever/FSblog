@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FSblog后台管理系统</title>
+		<include file="public/head" />
+	</head>
+	<body class="whole-screen">
+		<header class="header">
+			<h2>后台管理系统</h2>
+			<div class="user-info">
+				欢迎您，{:session('user')}， <a href="{:U('Index/logout')}" title='注销'>注销</a>
+			</div>
+		</header>
+		<div class="frame">
+			<iframe src="{:U('Index/main')}" ></iframe>
+		</div>
+		<!-- 高度满屏start -->
+		<script type="text/javascript">
+			$(window).resize((function () {
+				$('.frame').height($(window).height() - $('.header').height());
+				return arguments.callee;
+			})());
+		</script>
+		<!-- 高度满屏end -->
+	</body>
+</html>
