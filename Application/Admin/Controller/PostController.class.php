@@ -37,7 +37,7 @@ class PostController extends BaseController {
 	 * @access public
 	 */
 	public function update() {
-		
+		$this->display();
 	}
 
 	/**

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<include file="public/head" />
+	</head>
+	<body>
+		<div class="content-wrap">
+			<div class="option-area">
+				<button class="btn" onclick="location.href='{:U(\'Page/add\')}';">新增</button>
+			</div>
+			<div class="content">
+				<table class="c-table">
+					<notempty name="pages">
+					<thead>
+						<tr>
+							<th width="100">标识</th>
+							<th>标题</th>
+							<th width="200">链接</th>
+							<th width="80">状态</th>
+							<th width="80">模版布局</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="pages" id="vo">
+							<tr>
+								<td>
+									<input type="hidden" value="{$vo.id}" name="ids[]" />
+									{$vo.page_sign}
+								</td>
+								<td>{$vo.page_name}</td>
+								<td>{$vo.page_url}</td>
+								<td>{$vo.page_status}</td>
+								<td>{$vo.page_layout}</td>
+								<td>
+									<a href="{:U('Page/update',array('id'=>$vo['id']))}">编辑</a>
+									<a href="{:U('Home/Post/index',array('id'=>$vo['id']))}" target="_blank">查看</a>
+								</td>
+							</tr>
+						</volist>
+					</tbody>
+					<else />
+					<tfoot>
+						<tr>
+							<td colspan="5">
+								暂无页面！
+							</td>
+						</tr>
+					</tfoot>
+					</notempty>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
