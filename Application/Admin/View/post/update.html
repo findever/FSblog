@@ -10,23 +10,36 @@
 				<form action="post" enctype="multipart/form-data">
 					<table class="form-table">
 						<tr>
-							<th>标题：</th><td></td>
+							<th>* 标题：</th>
+							<td><input type="text" value="" name="post_title" /></td>
 						</tr>
 						<tr>
-							<th>转载来源：</th><td></td>
+							<th>转载来源：<small>（不填则为原创）</small></th>
+							<td><input type="text" value="" name="post_title" /></td>
 						</tr>
 						<tr>
-							<th>状态：</th><td></td>
+							<th>* 状态：</th>
+							<td>
+								<select name="status">
+									<option value="1">发布</option>
+									<option value="0">隐藏</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
-							<th>缩略图：</th><td></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea id="container"></textarea>
+							<th>* 缩略图：<small>（100*100）</small></th>
+							<td>
+								<select name="thumb_type">
+									<option value="1">自动生成</option>
+									<option value="0">自定义</option>
+								</select>
+								<input type="file" name="post_title" />
 							</td>
 						</tr>
 					</table>
+					<p>
+						<textarea id="container" style="width: 80%;height:400px;"></textarea>
+					</p>
 				</form>
 			</div>
 		</div>

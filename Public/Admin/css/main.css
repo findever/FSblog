@@ -353,9 +353,6 @@ iframe{
 	margin-bottom: 10px;
 	border-bottom: 1px #ccc solid;
 }
-.content{
-	
-}
 .c-table{
 	width: 100%;
 	text-align: center;
@@ -397,4 +394,26 @@ iframe{
 }
 .pagination .muti-apply{
 	float: left;
+}
+.form-table{
+	text-align: left;
+}
+.form-table th,.form-table td{
+	padding: 5px 10px;
+	border: 1px #DFDFDF solid;
+	background: #EAEAEA;
+	min-width: 150px;
+}
+.form-table th{
+	text-align: right;
+	background: #E2E2E2;
+	border-color: #CFCFCF;
+}
+.form-table th small{
+	font-weight: normal;
+	color: #CD6356;
+	display: block;
+}
+.form-table input[type="text"]{
+	min-width: 400px;
 }
