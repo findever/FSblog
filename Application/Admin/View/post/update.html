@@ -21,9 +21,23 @@
 						<tr>
 							<th>缩略图：</th><td></td>
 						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea id="container"></textarea>
+							</td>
+						</tr>
 					</table>
 				</form>
 			</div>
 		</div>
+		<js href="__PUBLIC__/Admin/ueditor/ueditor.config.js" />    
+		<js href="__PUBLIC__/Admin/ueditor/ueditor.all.min.js" />
+		<script>
+			$(function(){
+				var ue = UE.getEditor('container',{
+					serverUrl :"{:U('Post/ueditor')}"
+				});
+			});
+		</script>
 	</body>
 </html>

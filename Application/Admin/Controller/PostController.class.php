@@ -41,6 +41,26 @@ class PostController extends BaseController {
 	}
 
 	/**
+	 * ueditor后台接口
+	 * @access public
+	 */
+	public function ueditor() {
+		$data = new \Org\Util\Ueditor();
+		C('SHOW_PAGE_TRACE',false);
+		$this->show($data->output());
+	}
+
+	/**
+	 * 获取指定id文章的信息
+	 * @access private
+	 * @param Int $id 文章ID
+	 * @return Array 文章信息数组
+	 */
+	private function _getPostById($id) {
+		return M('post')->where("id=" . $id)->find();
+	}
+
+	/**
 	 * 获取最新文章列表
 	 * @access private
 	 * @param Int $p 页码
