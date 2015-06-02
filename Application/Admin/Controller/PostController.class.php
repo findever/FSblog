@@ -41,13 +41,25 @@ class PostController extends BaseController {
 	}
 
 	/**
-	 * ueditor后台接口
+	 * 批量删除文章
 	 * @access public
 	 */
-	public function ueditor() {
-		$data = new \Org\Util\Ueditor();
-		C('SHOW_PAGE_TRACE',false);
-		$this->show($data->output());
+	public function delete() {
+		$ids = I('post.ids', 0, 'intval');
+		$condition = array('id' => array('in', $ids));
+		$postModel = M('post');
+		$result = $postModel->where($condition)->delete();
+		if ($result === false) {
+			$errorMsg = '删除失败！';
+			if (APP_DEBUG) {
+				$errorMsg .= $pageModel->getDbError();
+			}
+			$this->error($errorMsg);
+		}
+		if ($result === 0) {
+			$this->error('没有删除任何数据！');
+		}
+		$this->success('成功删除 ' . $result . ' 条数据~');
 	}
 
 	/**

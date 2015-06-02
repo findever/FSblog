@@ -27,5 +27,15 @@ class BaseController extends Controller {
 	public function auth() {
 		return session('user');
 	}
+	
+	/**
+	 * Ueditor后台接口
+	 * @access public
+	 */
+	public function ueditor() {
+		$data = new \Org\Util\Ueditor();
+		C('SHOW_PAGE_TRACE', false);
+		$this->show($data->output());
+	}
 
 }

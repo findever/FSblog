@@ -12,6 +12,7 @@
 						<tr>
 							<th>* 标题：</th>
 							<td><input type="text" value="" name="post_title" /></td>
+							<td rowspan="4"></td>
 						</tr>
 						<tr>
 							<th>转载来源：<small>（不填则为原创）</small></th>
@@ -29,12 +30,26 @@
 						<tr>
 							<th>* 缩略图：<small>（100*100）</small></th>
 							<td>
-								<select name="thumb_type">
+								<select name="thumb_type" onchange='$(this).siblings("input").toggle();'>
 									<option value="1">自动生成</option>
 									<option value="0">自定义</option>
 								</select>
-								<input type="file" name="post_title" />
+								<input type="file" name="post_thumbnail" style="display: none;" />
 							</td>
+						</tr>
+						<tr>
+							<th>* 分类：</th>
+							<td>
+								<input type="text" value=""  readOnly="readOnly" onclick="chooseCates(this)" />
+								<input type="hidden" value="" name="post_cats" />
+								<div id="cate-list" data-load="false">
+									<ul></ul>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>标签：</th>
+							<td><input type="text" value="" name="post_tags" /></td>
 						</tr>
 					</table>
 					<p>
@@ -48,9 +63,27 @@
 		<script>
 			$(function(){
 				var ue = UE.getEditor('container',{
-					serverUrl :"{:U('Post/ueditor')}"
+					serverUrl :"{:U('Index/ueditor')}"
 				});
 			});
+			/**
+			 * 选择分类
+			 */
+			function chooseCates(obj){
+				var cateList = $('#cate-list');
+				if(cateList.data("load")){
+					cateList.show();
+					return;
+				}
+				$.getJSON('{:U("Category/ajaxList")}',function(data){
+					var cateListItems = "";
+					for(var i in data){
+						cateListItems += '<li data-id='+data[i].id+'>'+data[i].cate_name+'</li>';
+					}
+					cateList.children('ul').html(cateListItems);
+					cateList.show();
+				});
+			}
 		</script>
 	</body>
 </html>
