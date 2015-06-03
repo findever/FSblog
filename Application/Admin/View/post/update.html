@@ -12,7 +12,9 @@
 						<tr>
 							<th>* 标题：</th>
 							<td><input type="text" value="" name="post_title" /></td>
-							<td rowspan="4"></td>
+							<td rowspan="6" style="background:#fff;vertical-align: top;">
+								<img id="post-thumbnail-img" _src="__PUBLIC__/img/default_post_thumbnail.png" src="__PUBLIC__/img/default_post_thumbnail.png" width="100" title="文章缩略图" alt="文章缩略图" onclick="$('#post-thumbnail').click();" />
+							</td>
 						</tr>
 						<tr>
 							<th>转载来源：<small>（不填则为原创）</small></th>
@@ -34,7 +36,7 @@
 									<option value="1">自动生成</option>
 									<option value="0">自定义</option>
 								</select>
-								<input type="file" name="post_thumbnail" style="display: none;" />
+								<input type="file" name="post_thumbnail" id="post-thumbnail" style="display: none;" />
 							</td>
 						</tr>
 						<tr>
@@ -43,12 +45,14 @@
 								<input type="text" value=""  readOnly="readOnly" onclick="chooseCates(this)" />
 								<input type="hidden" value="" name="post_cats" />
 								<div id="cate-list" data-load="false">
-									<ul></ul>
+									<ul>
+										<li>加载中...</li>
+									</ul>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th>标签：</th>
+							<th>标签：<small>（用逗号分割）</small></th>
 							<td><input type="text" value="" name="post_tags" /></td>
 						</tr>
 					</table>
@@ -62,27 +66,73 @@
 		<js href="__PUBLIC__/Admin/ueditor/ueditor.all.min.js" />
 		<script>
 			$(function(){
+				// 编辑器初始化
 				var ue = UE.getEditor('container',{
 					serverUrl :"{:U('Index/ueditor')}"
 				});
+				
+				// 图片选择事件监听
+				if(typeof FileReader!=='undefined'){ 
+					$('#post-thumbnail').on('change',function(){
+						var file = this.files[0];
+						try{
+							if(!/image\/\w+/.test(file.type)){
+								throw new Error("文件必须为图片！");
+							}
+							if(file.size && file.size/1024/1024 > 1){
+								throw new Error("图片不能超过1M！");
+							}
+						}catch(e){
+							$('#post-thumbnail').val('');
+							$('#post-thumbnail-img').attr('src', $('#post-thumbnail-img').attr('_src'));
+							alert(e.message); 
+							return false; 
+						}
+						var reader = new FileReader(); 
+						reader.readAsDataURL(file);
+						reader.onload = function(){
+							$('#post-thumbnail-img').get(0).src = this.result;
+						}
+					});
+				}
 			});
+			
 			/**
 			 * 选择分类
+			 * @param obj dom对象
 			 */
 			function chooseCates(obj){
 				var cateList = $('#cate-list');
-				if(cateList.data("load")){
-					cateList.show();
-					return;
+				cateList.toggle();
+				if(!cateList.data("load")){
+					cateList.data("load", true);
+					// 绑定事件
+					cateList.on('change',':checkbox',function(){
+						var vals = '' , names = '';
+						cateList.find(':checked').each(function(){
+							vals += ',' + $(this).val();
+							names += ', ' + $(this).data('name');
+						});
+						vals = vals.replace(/^,/,'');
+						names = names.replace(/^,/,'');
+						$(obj).val(names).siblings('input').val(vals);
+					});
+					// 加载数据
+					$.getJSON('{:U("Category/ajaxList")}',function(data){
+						var cateListItems = "";
+						for(var i in data){
+							cateListItems += '<li><label><input type="checkbox" id="cate-list-checkbox-'+data[i].id+'" data-name="'+data[i].cate_name+'" value='+data[i].id+' />'+data[i].cate_name+'</label></li>';
+						}
+						cateList.children('ul').html(cateListItems);
+						// 选择默认值
+						var defaultCates = $(obj).val().split(',');
+						for(var i in defaultCates){
+							if(defaultCates[i] !== ""){
+								$('#cate-list-checkbox-'+defaultCates[i]).click();
+							}
+						}
+					});
 				}
-				$.getJSON('{:U("Category/ajaxList")}',function(data){
-					var cateListItems = "";
-					for(var i in data){
-						cateListItems += '<li data-id='+data[i].id+'>'+data[i].cate_name+'</li>';
-					}
-					cateList.children('ul').html(cateListItems);
-					cateList.show();
-				});
 			}
 		</script>
 	</body>

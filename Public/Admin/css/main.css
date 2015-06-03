@@ -48,8 +48,8 @@ select {
 :-ms-input-placeholder{color:#999;}
 
 a {
-  color: #068966;
-  text-decoration: none;
+	color: #068966;
+	text-decoration: none;
 }
 a:hover{
 	color: #F5008C;
@@ -77,20 +77,20 @@ code,pre{
 /***********  icon *****************/
 [class^="icon-"],
 [class*=" icon-"] {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  *margin-right: .3em;
-  line-height: 14px;
-  vertical-align: text-top;
-  background-image: url("../img/ico/glyphicons-halflings.png");
-  background-position: 14px 14px;
-  background-repeat: no-repeat;
-  margin-top: 4px;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	*margin-right: .3em;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("../img/ico/glyphicons-halflings.png");
+	background-position: 14px 14px;
+	background-repeat: no-repeat;
+	margin-top: 4px;
 }
 .icon-white
- {
-  background-image: url("../img/ico/glyphicons-halflings-white.png");
+{
+	background-image: url("../img/ico/glyphicons-halflings-white.png");
 }
 .icon12{
 	margin-top: 2px;
@@ -327,10 +327,10 @@ iframe{
 }
 /***********  侧边导航栏 *****************/
 .nav-sider{
-	
+
 }
 .nav-sider li{
-	
+
 }
 .nav-sider li a{
 	display: block;
@@ -416,4 +416,23 @@ iframe{
 }
 .form-table input[type="text"]{
 	min-width: 400px;
+}
+#cate-list{
+	padding: 10px 0;
+	display: none;
+}
+#cate-list li{
+	width: 50%;
+	height: 25px;
+	line-height: 25px;
+	font-size: 1.2rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	word-wrap: break-word;
+	display: inline-block;
+}
+#cate-list li input{
+	vertical-align:middle;
+	margin: -2px 3px 1px 0;
 }
