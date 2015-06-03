@@ -418,8 +418,11 @@ iframe{
 	min-width: 400px;
 }
 #cate-list{
-	padding: 10px 0;
+	padding: 10px 10px;
+	border: 1px #DADADA solid;
+	background: #F2F2F2;
 	display: none;
+	margin-top: 10px;
 }
 #cate-list li{
 	width: 50%;
@@ -435,4 +438,19 @@ iframe{
 #cate-list li input{
 	vertical-align:middle;
 	margin: -2px 3px 1px 0;
+}
+.post-edit-action{
+	margin-top: 20px;
+}
+.post-btn{
+	width: 80%;
+	margin-bottom: 10px;
+	height: 40px;
+	font-size: 1.6rem;
+	background: #e8e8e8;
+	border: none;
+}
+.green-btn{
+	background: #28C389;
+	color: #fff;
 }

@@ -7,13 +7,17 @@
 	<body>
 		<div class="content-wrap">
 			<div class="content">
-				<form action="post" enctype="multipart/form-data">
+				<form action="{:U('Post/save')}" method="post" enctype="multipart/form-data">
 					<table class="form-table">
 						<tr>
 							<th>* 标题：</th>
 							<td><input type="text" value="" name="post_title" /></td>
-							<td rowspan="6" style="background:#fff;vertical-align: top;">
-								<img id="post-thumbnail-img" _src="__PUBLIC__/img/default_post_thumbnail.png" src="__PUBLIC__/img/default_post_thumbnail.png" width="100" title="文章缩略图" alt="文章缩略图" onclick="$('#post-thumbnail').click();" />
+							<td rowspan="6" style="background:#fff;vertical-align: top;text-align: center;">
+								<img id="post-thumbnail-img" _src="__PUBLIC__/img/default_post_thumbnail.png" src="__PUBLIC__/img/default_post_thumbnail.png" width="100" title="文章缩略图" alt="文章缩略图" onclick="if($('#post-thumbnail').is(':visible'))$('#post-thumbnail').click();" />
+								<p class="post-edit-action">
+									<input type="submit" class="post-btn green-btn" value="确定" />
+									<input type="button" class="post-btn grey-btn" value="取消" onclick="history.go(-1);" />
+								</p>
 							</td>
 						</tr>
 						<tr>

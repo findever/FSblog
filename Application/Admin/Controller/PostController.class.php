@@ -39,6 +39,14 @@ class PostController extends BaseController {
 	public function update() {
 		$this->display();
 	}
+	
+	/**
+	 * 保存文章
+	 * @access public
+	 */
+	public function save(){
+		
+	}
 
 	/**
 	 * 批量删除文章
