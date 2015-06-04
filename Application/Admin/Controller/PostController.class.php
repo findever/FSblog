@@ -60,7 +60,7 @@ class PostController extends BaseController {
 		if ($result === false) {
 			$errorMsg = '删除失败！';
 			if (APP_DEBUG) {
-				$errorMsg .= $pageModel->getDbError();
+				$errorMsg .= $postModel->getDbError();
 			}
 			$this->error($errorMsg);
 		}
