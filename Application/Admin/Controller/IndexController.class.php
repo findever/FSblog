@@ -43,6 +43,7 @@ class IndexController extends BaseController {
 					throw new \Exception('用户名或密码不正确！');
 				}
 				session('user', $user['user']);
+				session('user_id', $user['id']);
 				$this->redirect('Index/index');
 			} catch (\Exception $e) {
 				$defaultVals['notice'] = $e->getMessage();

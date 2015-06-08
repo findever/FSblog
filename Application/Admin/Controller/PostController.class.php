@@ -45,6 +45,18 @@ class PostController extends BaseController {
 	 * @access public
 	 */
 	public function save(){
+		$postModel = D('post');
+		if(!$postModel->create()){
+			$this->error($postModel->getError());
+		}
+		
+		// 摘要处理
+		
+		// 分类处理
+		
+		// 标签处理
+		
+		
 		
 	}
 
@@ -102,6 +114,15 @@ class PostController extends BaseController {
 		$show = $page->show();
 		$posts = $postModel->where($condition)->page($p)->limit($size)->order('id desc')->select();
 		return array($posts, $show);
+	}
+	
+	/**
+	 * 获取所有分类的ID
+	 * @access private
+	 * @return Array 分类ID数组
+	 */
+	private function _getAllCateIds(){
+		return M('category')->where('id>3')->getField('id');
 	}
 
 }

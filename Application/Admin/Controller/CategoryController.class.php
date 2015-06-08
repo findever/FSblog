@@ -22,7 +22,7 @@ class CategoryController extends BaseController {
 	 * @access public
 	 */
 	public function ajaxList() {
-		$data = M('category')->select();
+		$data = M('category')->where('id>2')->select();
 		$this->ajaxReturn($data);
 	}
 

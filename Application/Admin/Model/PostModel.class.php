@@ -14,12 +14,17 @@ use Think\Model;
 class PostModel extends Model {
 
 	protected $_validate = array(
-		array('post_author', '', '帐号名称已经存在！', 0, 'unique', 1), // 在新增的时候验证name字段是否唯一
-		array('post_date', array(1, 2, 3), '值的范围不正确！', 2, 'in'), // 当值不为空的时候判断是否在一个范围内
-		array('post_title', 'password', '确认密码不正确', 0, 'confirm'), // 验证确认密码是否和密码一致
-		array('post_content', 'checkPwd', '密码格式不正确', 0, 'function'), // 自定义函数验证密码格式
-		array('post_status', 'checkPwd', '密码格式不正确', 0, 'function') // 自定义函数验证密码格式
+		array('id', 'number', '非法更新！', self::VALUE_VALIDATE, 'unique', self::MODEL_UPDATE),
+		array('post_title', 'require', '标题不能为空', self::MUST_VALIDATE),
+		array('post_title', '1,50', '标题长度不能超过50个字符', self::MUST_VALIDATE, 'length'),
+		array('post_from', '/^https?:\/\/[^\s]+$/i', '转载来源必须为url链接，且不超过100个字符', self::VALUE_VALIDATE, 'regex'),
+		array('post_status', array(0, 1), '状态值范围不正确', self::MUST_VALIDATE, 'in'),
+		array('post_cats', '/^(\d+,)*$/', '分类值不正确', self::VALUE_VALIDATE, 'regex'),
+		array('post_remark', '1,300', '摘要不能超过300个字符', self::VALUE_VALIDATE, 'length'),
 	);
-	protected $_auto = array();
+	protected $_auto = array(
+		array('post_date','getCurrDate',self::MODEL_INSERT,'function'),
+		array('post_update_date','getCurrDate',self::MODEL_BOTH,'function'),
+	);
 
 }
