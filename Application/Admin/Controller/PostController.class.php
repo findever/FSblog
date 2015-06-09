@@ -51,11 +51,27 @@ class PostController extends BaseController {
 		}
 		
 		// 摘要处理
+		$content = $postModel->post_content;
+		if(!I('post.post_remark')){
+			$postModel->post_remark = mb_substr(trim(strip_tags($content)), 0, 300,'utf-8');;
+		}
 		
 		// 分类处理
+		$cates = explode(',', $postModel->post_cates);
+		if(empty($cates)){
+			$cates = array(3);
+		}
 		
 		// 标签处理
+		$tags = explode(',', $postModel->post_tags);
 		
+		// 开启事务
+		$postModel->startTrans();
+		// 保存文章
+		$postModel->save();
+		// 保存分类
+		
+		// 保存标签
 		
 		
 	}
