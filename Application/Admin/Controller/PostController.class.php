@@ -12,7 +12,7 @@ namespace Admin\Controller;
 use Admin\Controller\BaseController;
 
 class PostController extends BaseController {
-
+	
 	/**
 	 * 文章管理列表
 	 * @access public
@@ -49,7 +49,6 @@ class PostController extends BaseController {
 		if(!$postModel->create()){
 			$this->error($postModel->getError());
 		}
-		
 		// 摘要处理
 		$content = $postModel->post_content;
 		if(!I('post.post_remark')){
@@ -59,19 +58,32 @@ class PostController extends BaseController {
 		// 分类处理
 		$cates = explode(',', $postModel->post_cates);
 		if(empty($cates)){
-			$cates = array(3);
+			$cates = array(3); // 默认为未分类
 		}
 		
 		// 标签处理
 		$tags = explode(',', $postModel->post_tags);
 		
+		// 事务之前先准备好资源
+		$relaModel = M('relationship');
+		$relaData = array();
+		for($i=0,$len=count($cates);$i<$len;$i++){
+			$relaData[] = array('type'=>'cate-post','aid'=>$postModel->id,'bid'=>$cates[$i]);
+		}
+		for($i=0,$len=count($tags);$i<$len;$i++){
+			$relaData[] = array('type'=>'tag-post','aid'=>$postModel->id,'bid'=>$tags[$i]);
+		}
+		
 		// 开启事务
 		$postModel->startTrans();
-		// 保存文章
+		// 更新文章
 		$postModel->save();
-		// 保存分类
-		
-		// 保存标签
+		// 删除原有文章分类
+		if($postModel->id){
+			$relaModel->where('aid='.$postModel->id)->delete();
+		}
+		// 保存分类及标签
+		$relaModel->save($relaData);
 		
 		
 	}
