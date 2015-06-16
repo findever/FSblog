@@ -11,9 +11,12 @@
 					<table class="form-table">
 						<tr>
 							<th>* 标题：</th>
-							<td><input type="text" value="" name="post_title" /></td>
+							<td>
+								<input type="hidden" value="{$post.id|default=''}" name="id" />
+								<input type="text" value="{$post.post_title|default=''}" name="post_title" />
+							</td>
 							<td rowspan="7" style="background:#fff;vertical-align: top;text-align: center;">
-								<img id="post-thumbnail-img" _src="__PUBLIC__/img/default_post_thumbnail.png" src="__PUBLIC__/img/default_post_thumbnail.png" width="100" title="文章缩略图" alt="文章缩略图" onclick="if($('#post-thumbnail').is(':visible'))$('#post-thumbnail').click();" />
+								<img id="post-thumbnail-img" _src="{$post.post_thumbnail|default='__PUBLIC__/img/default_post_thumbnail.png'}" src="{$post.post_thumbnail|default='__PUBLIC__/img/default_post_thumbnail.png'}" width="100" height="100" title="文章缩略图" alt="文章缩略图" onclick="if($('#post-thumbnail').is(':visible'))$('#post-thumbnail').click();" />
 								<p class="post-edit-action">
 									<input type="submit" class="post-btn green-btn" value="确定" />
 									<input type="button" class="post-btn grey-btn" value="取消" onclick="history.go(-1);" />
@@ -22,28 +25,29 @@
 						</tr>
 						<tr>
 							<th>转载来源：<small>（不填则为原创）</small></th>
-							<td><input type="text" value="" name="post_from" /></td>
+							<td><input type="text" value="{$post.post_from|default=''}" name="post_from" /></td>
 						</tr>
 						<tr>
 							<th>* 状态：</th>
 							<td>
 								<select name="post_status">
-									<option value="1">发布</option>
-									<option value="0">隐藏</option>
+									<option value="1" <eq name='post.post_status' value='1'>selected</eq> >发布</option>
+									<option value="0" <eq name='post.post_status' value='0'>selected</eq> >隐藏</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th>缩略图：<small>（100*100）</small></th>
 							<td>
+								<input type="hidden" name="post_thumbnail" value="{$post.post_thumbnail|default=''}" />
 								<input type="file" name="post_thumbnail_file" id="post-thumbnail" />
 							</td>
 						</tr>
 						<tr>
 							<th>* 分类：</th>
 							<td>
-								<input type="text" value=""  readOnly="readOnly" onclick="chooseCates(this)" />
-								<input type="hidden" value="" name="post_cats" />
+								<input type="text" value="{$post.post_cates_text|default=''}"  readOnly="readOnly" onclick="chooseCates(this)" />
+								<input type="hidden" value="{$post.post_cates|default=''}" name="post_cates" />
 								<div id="cate-list" data-load="false">
 									<ul>
 										<li>加载中...</li>
@@ -53,15 +57,15 @@
 						</tr>
 						<tr>
 							<th>标签：<small>（用逗号分割）</small></th>
-							<td><input type="text" value="" name="post_tags" /></td>
+							<td><input type="text" value="{$post.post_tags|default=''}" name="post_tags" disabled placeholder="功能暂未开放" /></td>
 						</tr>
 						<tr>
 							<th>摘要：<small>（留空自动生成）</small></th>
-							<td><textarea name="post_remark" style="width:100%;height: 100px;" ></textarea></td>
+							<td><textarea name="post_remark" style="width:100%;height: 100px;" >{$post.post_remark|default=''}</textarea></td>
 						</tr>
 					</table>
 					<p>
-						<textarea id="container" name="post_content" style="width:722px;height:400px;"></textarea>
+						<textarea id="container" name="post_content" style="width:722px;height:400px;">{$post.post_content|default=''}</textarea>
 					</p>
 				</form>
 			</div>
@@ -96,7 +100,7 @@
 						reader.readAsDataURL(file);
 						reader.onload = function(){
 							$('#post-thumbnail-img').get(0).src = this.result;
-						}
+						};
 					});
 				}
 			});
@@ -129,7 +133,7 @@
 						}
 						cateList.children('ul').html(cateListItems);
 						// 选择默认值
-						var defaultCates = $(obj).val().split(',');
+						var defaultCates = $(obj).siblings('input').val().split(',');
 						for(var i in defaultCates){
 							if(defaultCates[i] !== ""){
 								$('#cate-list-checkbox-'+defaultCates[i]).click();
