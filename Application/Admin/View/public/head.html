@@ -4,3 +4,10 @@
 		<import type="css" file="css.normalize" basepath="__PUBLIC__/Admin" />
 		<import type="css" file="css.main" basepath="__PUBLIC__/Admin" />
 		<import type="js" file="js.jquery" basepath="__PUBLIC__/Admin" />
+		<script>
+			$(function(){
+				// 修复chrome设置html字体大小rem无效的问题
+				$('html').css('font-size','62.5%');
+				$('body').css('font-size','1.4rem');
+			});
+		</script>

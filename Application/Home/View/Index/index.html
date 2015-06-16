@@ -34,7 +34,7 @@
 							</span>
 						</p>
 						<p class="post-item-remark">
-							<img class="post-item-thumbnail" src="{$vo.post_thumbnail}<empty name='$vo.post_thumbnail'>{$thumbnail}</empty>" alt="{$vo.post_title}" />
+							<img class="post-item-thumbnail" src="<empty name='vo.post_thumbnail'>{$thumbnail}<else />{$vo.post_thumbnail}</empty>" alt="{$vo.post_title}" />
 							{$vo.post_remark}
 						</p>
 					</article>
