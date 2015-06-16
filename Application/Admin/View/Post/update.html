@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<include file="public/head" />
+	</head>
+	<body>
+		<div class="content-wrap">
+			<div class="content">
+				<form action="{:U('Post/save')}" method="post" enctype="multipart/form-data">
+					<table class="form-table">
+						<tr>
+							<th>* 标题：</th>
+							<td>
+								<input type="hidden" value="{$post.id|default=''}" name="id" />
+								<input type="text" value="{$post.post_title|default=''}" name="post_title" />
+							</td>
+							<td rowspan="7" style="background:#fff;vertical-align: top;text-align: center;">
+								<img id="post-thumbnail-img" _src="{$post.post_thumbnail|default='__PUBLIC__/img/default_post_thumbnail.png'}" src="{$post.post_thumbnail|default='__PUBLIC__/img/default_post_thumbnail.png'}" width="100" height="100" title="文章缩略图" alt="文章缩略图" onclick="if($('#post-thumbnail').is(':visible'))$('#post-thumbnail').click();" />
+								<p class="post-edit-action">
+									<input type="submit" class="post-btn green-btn" value="确定" />
+									<input type="button" class="post-btn grey-btn" value="取消" onclick="history.go(-1);" />
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<th>转载来源：<small>（不填则为原创）</small></th>
+							<td><input type="text" value="{$post.post_from|default=''}" name="post_from" /></td>
+						</tr>
+						<tr>
+							<th>* 状态：</th>
+							<td>
+								<select name="post_status">
+									<option value="1" <eq name='post.post_status' value='1'>selected</eq> >发布</option>
+									<option value="0" <eq name='post.post_status' value='0'>selected</eq> >隐藏</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>缩略图：<small>（100*100）</small></th>
+							<td>
+								<input type="hidden" name="post_thumbnail" value="{$post.post_thumbnail|default=''}" />
+								<input type="file" name="post_thumbnail_file" id="post-thumbnail" />
+							</td>
+						</tr>
+						<tr>
+							<th>* 分类：</th>
+							<td>
+								<input type="text" value="{$post.post_cates_text|default=''}"  readOnly="readOnly" onclick="chooseCates(this)" />
+								<input type="hidden" value="{$post.post_cates|default=''}" name="post_cates" />
+								<div id="cate-list" data-load="false">
+									<ul>
+										<li>加载中...</li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>标签：<small>（用逗号分割）</small></th>
+							<td><input type="text" value="{$post.post_tags|default=''}" name="post_tags" disabled placeholder="功能暂未开放" /></td>
+						</tr>
+						<tr>
+							<th>摘要：<small>（留空自动生成）</small></th>
+							<td><textarea name="post_remark" style="width:100%;height: 100px;" >{$post.post_remark|default=''}</textarea></td>
+						</tr>
+					</table>
+					<p>
+						<textarea id="container" name="post_content" style="width:722px;height:400px;">{$post.post_content|default=''}</textarea>
+					</p>
+				</form>
+			</div>
+		</div>
+		<js href="__PUBLIC__/Admin/ueditor/ueditor.config.js" />    
+		<js href="__PUBLIC__/Admin/ueditor/ueditor.all.min.js" />
+		<script>
+			$(function(){
+				// 编辑器初始化
+				var ue = UE.getEditor('container',{
+					serverUrl :"{:U('Index/ueditor')}"
+				});
+				
+				// 图片选择事件监听
+				if(typeof FileReader!=='undefined'){ 
+					$('#post-thumbnail').on('change',function(){
+						var file = this.files[0];
+						try{
+							if(!/image\/\w+/.test(file.type)){
+								throw new Error("文件必须为图片！");
+							}
+							if(file.size && file.size/1024/1024 > 1){
+								throw new Error("图片不能超过1M！");
+							}
+						}catch(e){
+							$('#post-thumbnail').val('');
+							$('#post-thumbnail-img').attr('src', $('#post-thumbnail-img').attr('_src'));
+							alert(e.message); 
+							return false; 
+						}
+						var reader = new FileReader(); 
+						reader.readAsDataURL(file);
+						reader.onload = function(){
+							$('#post-thumbnail-img').get(0).src = this.result;
+						}
+					});
+				}
+			});
+			
+			/**
+			 * 选择分类
+			 * @param obj dom对象
+			 */
+			function chooseCates(obj){
+				var cateList = $('#cate-list');
+				cateList.toggle();
+				if(!cateList.data("load")){
+					cateList.data("load", true);
+					// 绑定事件
+					cateList.on('change',':checkbox',function(){
+						var vals = '' , names = '';
+						cateList.find(':checked').each(function(){
+							vals += ',' + $(this).val();
+							names += ', ' + $(this).data('name');
+						});
+						vals = vals.replace(/^,/,'');
+						names = names.replace(/^,/,'');
+						$(obj).val(names).siblings('input').val(vals);
+					});
+					// 加载数据
+					$.getJSON('{:U("Category/ajaxList")}',function(data){
+						var cateListItems = "";
+						for(var i in data){
+							cateListItems += '<li><label><input type="checkbox" id="cate-list-checkbox-'+data[i].id+'" data-name="'+data[i].cate_name+'" value='+data[i].id+' />'+data[i].cate_name+'</label></li>';
+						}
+						cateList.children('ul').html(cateListItems);
+						// 选择默认值
+						var defaultCates = $(obj).siblings('input').val().split(',');
+						for(var i in defaultCates){
+							if(defaultCates[i] !== ""){
+								$('#cate-list-checkbox-'+defaultCates[i]).click();
+							}
+						}
+					});
+				}
+			}
+		</script>
+	</body>
+</html>

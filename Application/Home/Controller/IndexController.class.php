@@ -23,6 +23,7 @@ class IndexController extends BaseController {
 		$this->assign("posts", $posts);
 		$this->assign("pagination", $show);
 		$this->assign("topNav", $this->_getTopNav());
+		$this->assign("thumbnail", PostController::_getDeafultPostThumbnail());
 		$this->display();
 	}
 
