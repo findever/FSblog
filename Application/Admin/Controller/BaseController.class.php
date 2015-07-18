@@ -15,7 +15,7 @@ class BaseController extends Controller {
 
 	public function __construct() {
 		parent::__construct();
-		if(!$this->auth() && __ACTION__ !== '/Admin/Index/login'){
+		if(!$this->auth() && strtolower(__ACTION__) !== '/admin/index/login'){
 			$this->redirect('Index/login');
 			return;
 		}

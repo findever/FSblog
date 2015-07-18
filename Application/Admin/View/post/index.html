@@ -31,7 +31,7 @@
 									</td>
 									<td>{$vo.post_title}</td>
 									<td>{$vo.post_date}</td>
-									<td>{$vo.post_status}</td>
+									<td><if condition="$vo.post_status eq 0">隐藏<else />发布</if></td>
 									<td>
 										<a href="{:U('Post/update',array('id'=>$vo['id']))}">编辑</a>
 										<a href="{:U('Home/Post/index',array('id'=>$vo['id']))}" target="_blank">查看</a>

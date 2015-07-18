@@ -27,6 +27,7 @@ class PostController extends BaseController {
 			$this->error("对不起，文章不存在或已删除！");
 		}
 		list($prevPost, $nextPost) = $this->_getAdjoinPost($postId);
+		$this->_updatePostViewCount($postId);
 		$this->assign('prevPost', $prevPost);
 		$this->assign('nextPost', $nextPost);
 		$this->assign('post', $post);
@@ -88,6 +89,15 @@ class PostController extends BaseController {
 	 */
 	static function _getDeafultPostThumbnail() {
 		return C("defaultPostThumbnail") ? C("defaultPostThumbnail") : self::$defaultPostThumbnail;
+	}
+	
+	/**
+	 * 更新文章浏览数
+	 * @access private
+	 * @param Int $id 文章id
+	 */
+	private function _updatePostViewCount($id){
+		M('post')->where('id='.$id)->setInc("post_view_count",1);
 	}
 
 }
