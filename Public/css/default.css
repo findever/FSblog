@@ -57,6 +57,7 @@ a:hover{
 p{
 	padding: 0;
 	margin: 10px 0px;
+	text-indent: 0;
 }
 code,pre{
 	word-break: break-all;
@@ -434,6 +435,10 @@ code,pre{
 	padding: 10px;
 	word-break: break-all;
 	word-wrap: break-word;
+	overflow-x: hidden;
+}
+.post-item-content img,.post-item-content table{
+	max-width: 100%;
 }
 .post-from-info{
 	text-indent: 0;
