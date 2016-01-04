@@ -20,4 +20,8 @@ class NavController extends BaseController {
 		$this->assign("navs",$navs);
 		$this->display();
 	}
+	
+	public function add(){
+		$this->display("update");
+	}
 }

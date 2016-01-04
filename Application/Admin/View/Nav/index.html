@@ -37,7 +37,7 @@
 								<td>{$vo.nav_remark}</td>
 								<td>
 									<a href="{:U('Nav/update',array('id'=>$vo['id']))}">编辑</a>
-									<a href="{:U('Home/Nav/index',array('id'=>$vo['id']))}" target="_blank">查看</a>
+									<a href="{$vo.nav_url}" target="_blank">查看</a>
 								</td>
 							</tr>
 						</volist>

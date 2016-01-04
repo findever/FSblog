@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<include file="public/head" />
+	</head>
+	<body>
+		<div class="content-wrap">
+			<div class="content">
+				<form action="{:U('Post/save')}" method="post" enctype="multipart/form-data">
+					<table class="form-table">
+						<tr>
+							<th>* 标题：</th>
+							<td>
+								<input type="hidden" value="{$post.id|default=''}" name="id" />
+								<input type="text" value="{$post.post_title|default=''}" name="post_title" />
+							</td>
+						</tr>
+						<tr>
+							<th>链接：<small>（必须为绝对路径或完整url）</small></th>
+							<td><input type="text" value="{$post.post_from|default=''}" name="post_from" /></td>
+						</tr>
+						<tr>
+							<th>* 状态：</th>
+							<td>
+								<select name="post_status">
+									<option value="1" <eq name='post.post_status' value='1'>selected</eq> >显示</option>
+									<option value="0" <eq name='post.post_status' value='0'>selected</eq> >隐藏</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>* 打开方式：</th>
+							<td>
+								<select name="post_status">
+									<option value="1" <eq name='post.post_status' value='1'>selected</eq> >当前页面</option>
+									<option value="0" <eq name='post.post_status' value='0'>selected</eq> >新窗口</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>排序：<small>（数字越小越靠前）</small></th>
+							<td>
+								<input type="text" name="post_thumbnail" value="{$post.post_thumbnail|default=''}" />
+							</td>
+						</tr>
+						<tr>
+							<th>备注：</th>
+							<td><textarea name="post_remark" style="width:100%;height: 100px;" >{$post.post_remark|default=''}</textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="background:#fff;vertical-align: top;text-align: center;">
+								<p class="post-edit-action">
+									<input type="button" class="post-btn grey-btn" value="预览" onclick="history.go(-1);" />
+									<input type="submit" class="post-btn green-btn" value="确定" />
+									<input type="button" class="post-btn grey-btn" value="取消" onclick="history.go(-1);" />
+								</p>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				
+			});
+		</script>
+	</body>
+</html>
