@@ -22,12 +22,7 @@ class BaseController extends Controller {
 	 * @return Array
 	 */
 	protected function _getTopNav() {
-		return array(
-			"首页" => "/",
-			"DEMO" => "/demo",
-			"关于" => "/about.php",
-			"留言" => "/guessbook.php"
-		);
+		return M('nav')->where('nav_status = 1')->order('nav_sort')->select();
 	}
 
 }

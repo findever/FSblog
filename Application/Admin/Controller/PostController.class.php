@@ -130,8 +130,8 @@ class PostController extends BaseController {
 				throw new \Think\Exception("保存文章分类或标签出错出错");
 			}
 		} catch (\Think\Exception $e) {
-			$this->error($e->getMessage());
 			$postModel->rollback();
+			$this->error($e->getMessage());
 		}
 		$postModel->commit();
 		$this->success("保存成功");

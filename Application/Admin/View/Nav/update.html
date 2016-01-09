@@ -7,51 +7,51 @@
 	<body>
 		<div class="content-wrap">
 			<div class="content">
-				<form action="{:U('Post/save')}" method="post" enctype="multipart/form-data">
+				<form action="{:U('Nav/save')}" method="post" enctype="multipart/form-data">
 					<table class="form-table">
 						<tr>
 							<th>* 标题：</th>
 							<td>
-								<input type="hidden" value="{$post.id|default=''}" name="id" />
-								<input type="text" value="{$post.post_title|default=''}" name="post_title" />
+								<input type="hidden" value="{$nav.id|default=''}" name="id" />
+								<input type="text" value="{$nav.nav_name|default=''}" name="nav_name" />
 							</td>
 						</tr>
 						<tr>
 							<th>链接：<small>（必须为绝对路径或完整url）</small></th>
-							<td><input type="text" value="{$post.post_from|default=''}" name="post_from" /></td>
+							<td><input type="text" value="{$nav.nav_url|default=''}" name="nav_url" id="nav_url" /></td>
 						</tr>
 						<tr>
 							<th>* 状态：</th>
 							<td>
-								<select name="post_status">
-									<option value="1" <eq name='post.post_status' value='1'>selected</eq> >显示</option>
-									<option value="0" <eq name='post.post_status' value='0'>selected</eq> >隐藏</option>
+								<select name="nav_status">
+									<option value="1" <eq name='nav.nav_status' value='1'>selected</eq> >显示</option>
+									<option value="0" <eq name='nav.nav_status' value='0'>selected</eq> >隐藏</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th>* 打开方式：</th>
 							<td>
-								<select name="post_status">
-									<option value="1" <eq name='post.post_status' value='1'>selected</eq> >当前页面</option>
-									<option value="0" <eq name='post.post_status' value='0'>selected</eq> >新窗口</option>
+								<select name="nav_target">
+									<option value="_self" <eq name='nav.nav_target' value='_self'>selected</eq> >当前页面</option>
+									<option value="_blank" <eq name='nav.nav_target' value='_blank'>selected</eq> >新窗口</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th>排序：<small>（数字越小越靠前）</small></th>
 							<td>
-								<input type="text" name="post_thumbnail" value="{$post.post_thumbnail|default=''}" />
+								<input type="text" name="nav_sort" value="{$nav.nav_sort|default=''}" />
 							</td>
 						</tr>
 						<tr>
 							<th>备注：</th>
-							<td><textarea name="post_remark" style="width:100%;height: 100px;" >{$post.post_remark|default=''}</textarea></td>
+							<td><textarea name="nav_remark" style="width:100%;height: 100px;" >{$nav.nav_remark|default=''}</textarea></td>
 						</tr>
 						<tr>
 							<td colspan="2" style="background:#fff;vertical-align: top;text-align: center;">
 								<p class="post-edit-action">
-									<input type="button" class="post-btn grey-btn" value="预览" onclick="history.go(-1);" />
+									<input type="button" class="post-btn grey-btn" value="预览" onclick="previewNav()" />
 									<input type="submit" class="post-btn green-btn" value="确定" />
 									<input type="button" class="post-btn grey-btn" value="取消" onclick="history.go(-1);" />
 								</p>
@@ -62,9 +62,13 @@
 			</div>
 		</div>
 		<script>
-			$(function(){
-				
-			});
+			function previewNav(){
+				var navUrl = $('#nav_url').val();
+				if(navUrl.indexOf('http') !== 0){
+					navUrl = window.location.origin + navUrl;
+				}
+				window.open(navUrl,'_blank');
+			}
 		</script>
 	</body>
 </html>
